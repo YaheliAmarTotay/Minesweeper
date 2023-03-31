@@ -1,20 +1,17 @@
 'use strict'
 
-function getClassName(position) { // {i:2 , j:5}
-    const cellClass = `cell-${position.i}-${position.j}` // 'cell-2-5'
-    return cellClass
-}
 
-function renderCell(location, value) {
-    const cellSelector = '.' + getClassName(location) // cell-i-j
-    const elCell = document.querySelector(cellSelector)
-    elCell.innerHTML = value
-}
 
 // Returns the class name for a specific cell
 function getClassName(location) {
     const cellClass = 'cell-' + location.i + '-' + location.j
     return cellClass
+}
+
+function renderCell(location, value) {
+    // Select the elCell and set the value
+    const elCell = document.querySelector(`.cell-${location.i}-${location.j}`)
+    elCell.innerHTML = value
 }
 
 function updateTimer() { // בניה של הטיימר

@@ -12,7 +12,9 @@ h1 {
 
 
 
-
+.ison {
+    font-size: xx-large;
+}
 
 button {
     border-radius: 10px;
@@ -26,6 +28,22 @@ button {
     font-style: inherit;
     margin-left: 10px;
 
+}
+
+.modal {
+    display: none;
+    background-color: rgb(238, 197, 148);
+    color: black;
+    font-size: medium;
+    text-align: center;
+    margin: auto;
+    margin-top: 150px;
+    border: 5px solid rgb(12, 227, 216);
+    width: 300px;
+    padding: 20px;
+    position: absolute;
+    top: 100px;
+    left: calc(50% - 175px);
 }
 
 table,
