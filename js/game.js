@@ -116,29 +116,31 @@ function changeDifficulty(size, mines) {
     onInit()
 }
 
-
 function onCellClicked(event, elCell, i, j) {
-    console.log(event)
-    // if (event.button === 0) return left 
-    if (event.button === 2) onRighClicked(gBoard, elCell, i, j)
-    var countMines = gBoard[i][j].minesAroundCount
-    if (countMines === 0) {
-        elCell.style.backgroundColor = 'pink'
-        expandShown(gBoard, elCell, i, j)
-    } else {
-        elCell.innerText = countMines
-        elCell.style.backgroundColor = 'pink'
-        gGame.shownCount++
-    }
-    if (gBoard[i][j].isMine === MINES) {
-        elCell.innerText = MINES
-        gGame.shownCount++
-        gLives--
-        document.querySelector('h3 span').innerText = gLives
-        victory()
-        gameOver()
-    }
+    event.preventDefault()
+    console.log(event.button)
 
+    if (event.button === 2) {
+        onRighClicked(gBoard, elCell, i, j)
+    } else if (event.button === 0) {
+        var countMines = gBoard[i][j].minesAroundCount
+        if (countMines === 0) {
+            elCell.style.backgroundColor = 'pink'
+            expandShown(gBoard, elCell, i, j)
+        } else {
+            elCell.innerText = countMines
+            elCell.style.backgroundColor = 'pink'
+            gGame.shownCount++
+        }
+        if (gBoard[i][j].isMine === MINES) {
+            elCell.innerText = MINES
+            gGame.shownCount++
+            gLives--
+            document.querySelector('h3 span').innerText = gLives
+            victory()
+            gameOver()
+        }
+    }
 
 
 }
@@ -180,19 +182,19 @@ function openAllMines(board) {
 
 
 function onRighClicked(board, elCell, i, j) {
-    window.addEventListener = ('contextmanu', (ev) => {
-        ev.preventDefault()
-        console.log(elCell, i, j)
-        elCell.innerText = MARKED
-        // elCell.innerText = MARKED
-        board[i][j].isMarked = true
-        board[i][j].isMine = false
-        board[i][j].isShowm = true
-        gGame.shownCount++
-        gGame.markedCount++
+    // window.addEventListener = ('contextmanu', (ev) => {
 
-        console.log(gBoard)
-    })
+    console.log(elCell, i, j)
+    elCell.innerText = MARKED
+    // elCell.innerText = MARKED
+    board[i][j].isMarked = true
+    board[i][j].isMine = false
+    board[i][j].isShowm = true
+    gGame.shownCount++
+    gGame.markedCount++
+
+    console.log(gBoard)
+    // })
 
 }
 
