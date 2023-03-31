@@ -25,6 +25,7 @@ var gGame = {
 
 function onInit() {
     gLives == 3
+    gNumCell = gLevel.size ** 2
     gBoard = createBoard()
     renderBoard(gBoard)
     addMines(gBoard)
@@ -63,7 +64,8 @@ function renderBoard(board) {
             // if (!currCell.isShowm) cellClass += 'isShowm'
 
             strHTML += `<td class = "${cellClass}" 
-            onclick ="onCellClicked(event,this,${i},${j})">
+            onclick ="onCellClicked(event,this,${i},${j})" oncontextmenu ="onCellClicked(event,this,${i},${j})">
+           
             </td>`
 
 
@@ -128,6 +130,7 @@ function onCellClicked(event, elCell, i, j) {
             elCell.style.backgroundColor = 'pink'
             expandShown(gBoard, elCell, i, j)
         } else {
+            gBoard[i][j].isShowm = true
             elCell.innerText = countMines
             elCell.style.backgroundColor = 'pink'
             gGame.shownCount++
@@ -137,11 +140,11 @@ function onCellClicked(event, elCell, i, j) {
             gGame.shownCount++
             gLives--
             document.querySelector('h3 span').innerText = gLives
-            victory()
+
             gameOver()
         }
     }
-
+    victory()
 
 }
 
@@ -154,7 +157,7 @@ function expandShown(board, elCell, rowIdx, colIdx) {
         for (var j = colIdx - 1; j <= colIdx + 1; j++) {
             //console.log(j)
             if (j < 0 || j >= board[i].length) continue
-            if (board[i][j].isMine != MINES) {
+            if (board[i][j].isMine != MINES && !board[i][j].isShowm) {
                 var currCell = board[i][j]
                 currCell.isShowm = true
                 gGame.shownCount++
@@ -199,9 +202,10 @@ function onRighClicked(board, elCell, i, j) {
 }
 
 function victory() {
+    console.log(gGame.shownCount)
     if (gGame.shownCount === gNumCell && gGame.markedCount === gLevel.mines) {
         var elH3 = document.querySelector('.user-msg')
-        elH3.innerText = "You are WINER!!!!"
+        elH3.innerText = "You are WINNER!!!!"
 
         var elbut = document.querySelector('.ison')
         elbut.innerText = "🥳"
