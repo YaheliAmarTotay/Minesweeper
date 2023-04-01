@@ -4,11 +4,11 @@ const MINES = '💣'
 const MARKED = '⛳️'
 var gLives = 3
 var gBoard
-var gPos
 var gStartT
-var isClicked = false
 var gNumCell
 var event
+var gIntervalId
+var countMine = 0
 
 
 var gLevel = {
@@ -108,20 +108,11 @@ function getEmptyPos() {
 
 }
 
-function changeDifficulty(size, mines) {
-    gLevel.size = size
-    gLevel.mines = mines
-    gLives === 0
-    gNumCell = size ** 2
-    // console.log(gNumCell)
-
-    onInit()
-}
 
 function onCellClicked(event, elCell, i, j) {
-    event.preventDefault()
-    console.log(event.button)
 
+    if (gGame.shownCount == 0) startTimer()
+    event.preventDefault()
     if (event.button === 2) {
         onRighClicked(gBoard, elCell, i, j)
     } else if (event.button === 0) {
@@ -138,6 +129,7 @@ function onCellClicked(event, elCell, i, j) {
         if (gBoard[i][j].isMine === MINES) {
             elCell.innerText = MINES
             gGame.shownCount++
+            countMine++
             gLives--
             document.querySelector('h3 span').innerText = gLives
 
@@ -217,39 +209,18 @@ function victory() {
 
 }
 
-function isOn() {
-
-    onInit()
-    gLives = 3
-    document.querySelector('h3 span').innerText = gLives
-    var elModal = document.querySelector('.modal')
-    elModal.style.display = 'none'
-
-}
-
 function gameOver() {
 
-    if (gLives === 0) {
+    if (gLives === 0 || countMine === gLevel.mines) {
         openAllMines(gBoard)
         var elModal = document.querySelector('.modal')
         elModal.style.display = 'block'
-        // stopTimer()
+        var elbut = document.querySelector('.start')
+        elbut.innerText = "😢"
+        stopTimer()
     }
 
-
-
-
 }
-
-function startTimer() {
-    gStartT = Date.now();
-    gIntervalId = setInterval(updateTimer, 10);
-}
-
-function stopTimer() {
-    clearInterval(gIntervalId);
-}
-
 
 
 function findLocationMines(board) {
@@ -281,3 +252,45 @@ function setMinesNegsCount(rowIdx, colIdx, board) {
     }
     return countMine
 }
+
+
+function changeDifficulty(size, mines) {
+    gLevel.size = size
+    gLevel.mines = mines
+    gLives === 0
+    gNumCell = size ** 2
+    // console.log(gNumCell)
+    onInit()
+}
+
+function onStart() {
+
+    var elbut = document.querySelector('.start')
+    elbut.innerText = "😃"
+    stopTimer()
+    onInit()
+}
+
+
+function isOn() {
+
+    onInit()
+    gLives = 3
+    document.querySelector('h3 span').innerText = gLives
+    var elModal = document.querySelector('.modal')
+    elModal.style.display = 'none'
+
+}
+
+
+
+function startTimer() {
+    gStartT = Date.now();
+    gIntervalId = setInterval(updateTimer, 10);
+}
+
+function stopTimer() {
+    clearInterval(gIntervalId);
+}
+
+

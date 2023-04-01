@@ -12,25 +12,33 @@
 
 <body onload="onInit()">
     <h1>Mine sweeper Game</h1>
-    <h3>lives:<span>3</span></h3>
-    <div><span id="timer">00:00:00</span></div>
+    <h3>❤️<span>3</span></h3>
+    <h5><span id="timer">🕐00:00:00</span></h5>
 
-    <button onclick="changeDifficulty(4,2)">Easy</button>
-    <button onclick="changeDifficulty(8,14)">Medium</button>
-    <button onclick="changeDifficulty(12,32)">Hard</button>
+
+
+
+
     <table>
+
         <div>
             <tbody class="board"></tbody>
         </div>
 
-    </table>
-    <div class="modal">
-        <h4 class="user-msg">GAME OVER</h4>
-        <button class="ison" onclick="isOn()">🥺</button>
-    </div>
+        <button onclick="changeDifficulty(4,2)">Easy</button>
+        <button onclick="changeDifficulty(8,14)">Medium</button>
+        <button onclick="changeDifficulty(12,32)">Hard</button>
+        <div><button class="start" onclick="onStart()">😃</button></div>
+        <div class="modal">
+            <h4 class="user-msg">GAME OVER</h4>
+            <button class="ison" onclick="isOn()">🥺</button>
 
+
+    </table>
+    </div>
     <script src="js/utils.js"></script>
     <script src="js/game.js"></script>
+    <br>
     <h2> Yaheli Amar</h2>
 </body>
 

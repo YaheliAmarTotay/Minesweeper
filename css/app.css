@@ -10,7 +10,20 @@ h1 {
     font-style: unset;
 }
 
+h3 {
+    color: palevioletred;
+    font-size: xx-large;
+}
 
+h5 {
+    color: palevioletred;
+    font-size: xx-large;
+    border: 10px solid rgb(12, 227, 216);
+    width: 180px;
+    height: 60px;
+    margin: auto;
+
+}
 
 .ison {
     font-size: xx-large;
@@ -24,11 +37,21 @@ button {
     border: 5px solid rgb(12, 227, 216);
     border-radius: 10px;
     cursor: pointer;
-    background-color: rgb(238, 197, 148);
+    background-color: palevioletred;
     font-style: inherit;
     margin-left: 10px;
+    margin-top: 30px;
+
 
 }
+
+.start {
+    font-size: 50px;
+    width: 80px;
+    height: 80px;
+}
+
+
 
 .modal {
     display: none;
@@ -48,10 +71,10 @@ button {
 
 table,
 td {
-    border: 6px solid rgb(238, 197, 148);
+    border: 6px solid rgb(12, 227, 216);
     border-collapse: collapse;
     margin: auto;
-    margin-top: 20px;
+    margin-top: 30px;
     font-size: x-large;
     font-style: oblique;
 
