@@ -209,7 +209,7 @@ function victory() {
         elModal.style.display = 'block'
 
     }
-
+    stopTimer()
 }
 
 function gameOver() {
