@@ -8,7 +8,7 @@ var gStartT
 var gNumCell
 var event
 var gIntervalId
-var countMine = 0
+var gCountMine = 0
 
 
 var gLevel = {
@@ -24,7 +24,10 @@ var gGame = {
 
 
 function onInit() {
+
     gLives == 3
+    gGame.shownCount = 0
+    gCountMine = 0
     gNumCell = gLevel.size ** 2
     gBoard = createBoard()
     renderBoard(gBoard)
@@ -129,7 +132,7 @@ function onCellClicked(event, elCell, i, j) {
         if (gBoard[i][j].isMine === MINES) {
             elCell.innerText = MINES
             gGame.shownCount++
-            countMine++
+            gCountMine++
             gLives--
             document.querySelector('h3 span').innerText = gLives
 
@@ -211,13 +214,14 @@ function victory() {
 
 function gameOver() {
 
-    if (gLives === 0 || countMine === gLevel.mines) {
+    if (gLives === 0 || gCountMine === gLevel.mines) {
         openAllMines(gBoard)
         var elModal = document.querySelector('.modal')
         elModal.style.display = 'block'
-        var elbut = document.querySelector('.start')
-        elbut.innerText = "😢"
+
         stopTimer()
+        onInit()
+
     }
 
 }
@@ -263,13 +267,7 @@ function changeDifficulty(size, mines) {
     onInit()
 }
 
-function onStart() {
 
-    var elbut = document.querySelector('.start')
-    elbut.innerText = "😃"
-    stopTimer()
-    onInit()
-}
 
 
 function isOn() {
